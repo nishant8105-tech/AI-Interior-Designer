@@ -1,0 +1,309 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  roomType: string;
+  title: string;
+  description: string;
+  features: string[];
+  benefits: string[];
+}
+
+const { roomType, title, description, features, benefits } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+  <main>
+    <section class="landing-hero">
+      <div class="hero-gradient"></div>
+      <div class="hero-content">
+        <span class="hero-badge">AI-Powered {roomType.replace('_', ' ')} Design</span>
+        <h1 class="hero-title">{title}</h1>
+        <p class="hero-subtitle">{description}</p>
+        <div class="hero-cta">
+          <a href="/design" class="btn-primary">Design My {roomType.replace('_', ' ')}</a>
+          <a href="#features" class="btn-secondary">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="features-section" id="features">
+      <div class="container">
+        <span class="section-eyebrow">Features</span>
+        <h2 class="section-title">Everything you need to redesign your {roomType.replace('_', ' ')}</h2>
+        <div class="features-grid">
+          {features.map((feature) => (
+            <div class="feature-card">
+              <p>{feature}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits-section">
+      <div class="container">
+        <span class="section-eyebrow">Benefits</span>
+        <h2 class="section-title">Why choose AI {roomType.replace('_', ' ')} design?</h2>
+        <div class="benefits-grid">
+          {benefits.map((benefit) => (
+            <div class="benefit-item">
+              <span class="benefit-check">✓</span>
+              <p>{benefit}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="cta-title">Ready to transform your {roomType.replace('_', ' ')}?</h2>
+        <p class="cta-subtitle">Get started in seconds. No design experience needed.</p>
+        <a href="/design" class="btn-primary btn-large">Start Designing Now</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .landing-hero {
+    position: relative;
+    overflow: hidden;
+    padding: var(--spacing-5xl) var(--spacing-lg);
+    background: var(--color-canvas);
+    text-align: center;
+  }
+
+  .hero-gradient {
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 120%;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 124, 240, 0.12), transparent),
+      radial-gradient(ellipse 60% 40% at 50% 30%, rgba(121, 40, 202, 0.1), transparent),
+      radial-gradient(ellipse 70% 50% at 80% 45%, rgba(255, 0, 128, 0.08), transparent);
+    filter: blur(60px);
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: var(--font-family-geist-mono);
+    font-size: 12px;
+    color: var(--color-body);
+    background: var(--color-canvas-soft);
+    padding: var(--spacing-xxs) var(--spacing-xs);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .hero-title {
+    font-family: var(--font-family-geist);
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 48px;
+    letter-spacing: -2.4px;
+    color: var(--color-ink);
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-family-geist);
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+    margin: 0 0 var(--spacing-xl);
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 var(--spacing-sm);
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-on-primary);
+    background: var(--color-primary);
+    border: none;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 var(--spacing-sm);
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-ink);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-canvas-soft);
+  }
+
+  .features-section,
+  .benefits-section {
+    padding: var(--spacing-5xl) var(--spacing-lg);
+  }
+
+  .features-section {
+    background: var(--color-canvas-soft);
+  }
+
+  .benefits-section {
+    background: var(--color-canvas);
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    display: block;
+    font-family: var(--font-family-geist-mono);
+    font-size: 12px;
+    color: var(--color-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-title {
+    font-family: var(--font-family-geist);
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -1.28px;
+    color: var(--color-ink);
+    text-align: center;
+    margin: 0 0 var(--spacing-3xl);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .feature-card {
+    padding: var(--spacing-lg);
+    background: var(--color-canvas);
+    border-radius: var(--radius-md);
+    box-shadow:
+      0px 2px 2px rgba(0, 0, 0, 0.04),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  }
+
+  .feature-card p {
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .benefit-check {
+    color: var(--color-success);
+    font-weight: 600;
+  }
+
+  .benefit-item p {
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .cta-section {
+    padding: var(--spacing-5xl) var(--spacing-lg);
+    background: var(--color-primary);
+    text-align: center;
+  }
+
+  .cta-title {
+    font-family: var(--font-family-geist);
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -1.28px;
+    color: var(--color-on-primary);
+    margin: 0 0 var(--spacing-sm);
+  }
+
+  .cta-subtitle {
+    font-family: var(--font-family-geist);
+    font-size: 18px;
+    color: var(--color-hairline-strong);
+    margin: 0 0 var(--spacing-xl);
+  }
+
+  .btn-large {
+    height: 56px;
+    padding: 0 var(--spacing-lg);
+    font-size: 18px;
+  }
+
+  @media (max-width: 600px) {
+    .hero-title {
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    .hero-cta {
+      flex-direction: column;
+    }
+
+    .features-grid,
+    .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

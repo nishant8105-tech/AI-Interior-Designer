@@ -1,0 +1,1054 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+---
+
+<Layout title="Design Your Room — RoomIQ">
+  <Nav showAuth={false} />
+  <main class="design-page">
+    <div class="design-container">
+      <div class="design-steps" id="design-steps">
+        <div class="step active" data-step="1">
+          <span class="step-num">1</span>
+          <span class="step-label">Upload</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="2">
+          <span class="step-num">2</span>
+          <span class="step-label">Analyze</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="3">
+          <span class="step-num">3</span>
+          <span class="step-label">Goals</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="4">
+          <span class="step-num">4</span>
+          <span class="step-label">Style</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="5">
+          <span class="step-num">5</span>
+          <span class="step-label">Report</span>
+        </div>
+      </div>
+
+      <div class="design-content" id="design-content">
+        <!-- Step 1: Upload -->
+        <div class="wizard-step active" id="step-1">
+          <h2 class="wizard-title">Upload your room photo</h2>
+          <p class="wizard-subtitle">Take a photo or upload an existing image of your room</p>
+
+          <div class="upload-zone" id="upload-zone">
+            <div class="upload-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="upload-text">Drag and drop your room photo here</p>
+            <p class="upload-hint">or click to browse</p>
+            <input type="file" id="file-input" accept="image/*" hidden />
+          </div>
+
+          <div class="preview-container" id="preview-container" style="display: none;">
+            <img id="preview-image" alt="Room preview" />
+            <button class="btn-remove" id="btn-remove">Remove</button>
+          </div>
+
+          <div class="room-type-select">
+            <label class="form-label">Room Type</label>
+            <select id="room-type" class="form-select">
+              <option value="bedroom">Bedroom</option>
+              <option value="living_room" selected>Living Room</option>
+              <option value="office">Office</option>
+              <option value="kitchen">Kitchen</option>
+              <option value="bathroom">Bathroom</option>
+              <option value="dining_room">Dining Room</option>
+              <option value="studio">Studio Apartment</option>
+            </select>
+          </div>
+
+          <button class="btn-primary btn-full" id="btn-analyze" disabled>Analyze Room</button>
+        </div>
+
+        <!-- Step 2: Analysis -->
+        <div class="wizard-step" id="step-2" style="display: none;">
+          <h2 class="wizard-title">Analyzing your room</h2>
+          <p class="wizard-subtitle">AI is evaluating layout, lighting, storage, and style</p>
+
+          <div class="analysis-loading" id="analysis-loading">
+            <div class="loader"></div>
+            <p>Analyzing dimensions and design elements...</p>
+          </div>
+
+          <div class="analysis-results" id="analysis-results" style="display: none;">
+            <div class="score-overview">
+              <div class="score-main">
+                <span class="score-number" id="design-score">0</span>
+                <span class="score-label">Design Score</span>
+              </div>
+            </div>
+
+            <div class="score-grid">
+              <div class="score-item">
+                <span class="score-name">Layout</span>
+                <div class="score-bar"><div class="score-fill" id="layout-bar"></div></div>
+                <span class="score-val" id="layout-score">0</span>
+              </div>
+              <div class="score-item">
+                <span class="score-name">Lighting</span>
+                <div class="score-bar"><div class="score-fill" id="lighting-bar"></div></div>
+                <span class="score-val" id="lighting-score">0</span>
+              </div>
+              <div class="score-item">
+                <span class="score-name">Storage</span>
+                <div class="score-bar"><div class="score-fill" id="storage-bar"></div></div>
+                <span class="score-val" id="storage-score">0</span>
+              </div>
+              <div class="score-item">
+                <span class="score-name">Style</span>
+                <div class="score-bar"><div class="score-fill" id="style-bar"></div></div>
+                <span class="score-val" id="style-score">0</span>
+              </div>
+              <div class="score-item">
+                <span class="score-name">Space</span>
+                <div class="score-bar"><div class="score-fill" id="space-bar"></div></div>
+                <span class="score-val" id="space-score">0</span>
+              </div>
+              <div class="score-item">
+                <span class="score-name">Balance</span>
+                <div class="score-bar"><div class="score-fill" id="balance-bar"></div></div>
+                <span class="score-val" id="balance-score">0</span>
+              </div>
+            </div>
+
+            <div class="findings-section">
+              <h3 class="section-title">AI Findings</h3>
+              <div class="findings-list" id="findings-list"></div>
+            </div>
+
+            <div class="recommendations-section">
+              <h3 class="section-title">Recommendations</h3>
+              <div class="recommendations-list" id="recommendations-list"></div>
+            </div>
+
+            <button class="btn-primary btn-full" id="btn-goals">Choose Design Goal</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Goals -->
+        <div class="wizard-step" id="step-3" style="display: none;">
+          <h2 class="wizard-title">What's your design goal?</h2>
+          <p class="wizard-subtitle">Select what you want to achieve with this redesign</p>
+
+          <div class="goals-grid" id="goals-grid"></div>
+
+          <button class="btn-primary btn-full" id="btn-style" disabled>Select Style</button>
+        </div>
+
+        <!-- Step 4: Style -->
+        <div class="wizard-step" id="step-4" style="display: none;">
+          <h2 class="wizard-title">Choose your style</h2>
+          <p class="wizard-subtitle">Pick the aesthetic that matches your vision</p>
+
+          <div class="styles-grid" id="styles-grid"></div>
+
+          <button class="btn-primary btn-full" id="btn-report" disabled>Generate Design Report</button>
+        </div>
+
+        <!-- Step 5: Report -->
+        <div class="wizard-step" id="step-5" style="display: none;">
+          <div class="report-loading" id="report-loading">
+            <div class="loader"></div>
+            <p>Generating your personalized design report...</p>
+          </div>
+
+          <div class="report-content" id="report-content" style="display: none;">
+            <h2 class="wizard-title">Your Design Report</h2>
+
+            <div class="report-score">
+              <div class="score-before">
+                <span class="score-num" id="report-before">0</span>
+                <span class="score-label">Before</span>
+              </div>
+              <div class="score-arrow">→</div>
+              <div class="score-after">
+                <span class="score-num" id="report-after">0</span>
+                <span class="score-label">After</span>
+              </div>
+            </div>
+
+            <div class="report-summary" id="report-summary"></div>
+
+            <div class="report-section">
+              <h3>Improvements</h3>
+              <div id="improvements-list"></div>
+            </div>
+
+            <div class="report-section">
+              <h3>Budget Estimates</h3>
+              <div id="budget-list"></div>
+            </div>
+
+            <div class="report-section">
+              <h3>Shopping List</h3>
+              <div id="shopping-list"></div>
+            </div>
+
+            <div class="report-actions">
+              <button class="btn-primary" id="btn-save">Save Project</button>
+              <a href="/dashboard" class="btn-secondary">View Dashboard</a>
+              <button class="btn-secondary" id="btn-new">Start Over</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .design-page {
+    min-height: calc(100vh - 64px);
+    background: var(--color-canvas-soft);
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+
+  .design-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .design-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    opacity: 0.4;
+  }
+
+  .step.active {
+    opacity: 1;
+  }
+
+  .step.completed {
+    opacity: 0.7;
+  }
+
+  .step-num {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    font-family: var(--font-family-geist-mono);
+    font-size: 12px;
+    color: var(--color-body);
+  }
+
+  .step.active .step-num {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    border-color: var(--color-primary);
+  }
+
+  .step-label {
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    color: var(--color-body);
+  }
+
+  .step.active .step-label {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .step-line {
+    width: 40px;
+    height: 1px;
+    background: var(--color-hairline);
+  }
+
+  .wizard-step {
+    background: var(--color-canvas);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow:
+      0px 1px 1px rgba(0, 0, 0, 0.02),
+      0px 8px 16px -4px rgba(0, 0, 0, 0.04),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  }
+
+  .wizard-title {
+    font-family: var(--font-family-geist);
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.96px;
+    color: var(--color-ink);
+    text-align: center;
+    margin: 0 0 var(--spacing-xs);
+  }
+
+  .wizard-subtitle {
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    color: var(--color-body);
+    text-align: center;
+    margin: 0 0 var(--spacing-xl);
+  }
+
+  .upload-zone {
+    border: 2px dashed var(--color-hairline);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-3xl) var(--spacing-xl);
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .upload-zone:hover {
+    border-color: var(--color-body);
+    background: var(--color-canvas-soft);
+  }
+
+  .upload-icon {
+    color: var(--color-mute);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .upload-text {
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    color: var(--color-ink);
+    margin: 0 0 var(--spacing-xs);
+  }
+
+  .upload-hint {
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    color: var(--color-mute);
+    margin: 0;
+  }
+
+  .preview-container {
+    position: relative;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .preview-container img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    background: var(--color-canvas-soft);
+  }
+
+  .btn-remove {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-family-geist);
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .room-type-select {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .form-label {
+    display: block;
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .form-select {
+    width: 100%;
+    height: 40px;
+    padding: 0 var(--spacing-sm);
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    color: var(--color-ink);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-on-primary);
+    background: var(--color-primary);
+    border: none;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-full {
+    width: 100%;
+  }
+
+  .btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-ink);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-canvas-soft);
+  }
+
+  /* Loading */
+  .analysis-loading,
+  .report-loading {
+    text-align: center;
+    padding: var(--spacing-3xl);
+  }
+
+  .loader {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--color-hairline);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto var(--spacing-md);
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Scores */
+  .score-overview {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .score-main {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .score-number {
+    font-family: var(--font-family-geist);
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -3.2px;
+    color: var(--color-ink);
+  }
+
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .score-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .score-name {
+    font-family: var(--font-family-geist);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-body);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .score-bar {
+    height: 6px;
+    background: var(--color-canvas-soft);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+
+  .score-fill {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+    transition: width 0.6s ease;
+    width: 0;
+  }
+
+  .score-val {
+    font-family: var(--font-family-geist-mono);
+    font-size: 14px;
+    color: var(--color-ink);
+  }
+
+  .section-title {
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .findings-section,
+  .recommendations-section {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .findings-list,
+  .recommendations-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .finding-item,
+  .recommendation-item {
+    padding: var(--spacing-md);
+    background: var(--color-canvas-soft);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--color-hairline);
+  }
+
+  .finding-item.high {
+    border-left-color: var(--color-error);
+  }
+
+  .finding-item.medium {
+    border-left-color: var(--color-warning);
+  }
+
+  .recommendation-item.high {
+    border-left-color: var(--color-success);
+  }
+
+  .item-category {
+    font-family: var(--font-family-geist-mono);
+    font-size: 11px;
+    color: var(--color-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .item-text {
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    color: var(--color-ink);
+    margin: var(--spacing-xxs) 0;
+  }
+
+  .item-cost {
+    font-family: var(--font-family-geist);
+    font-size: 12px;
+    color: var(--color-body);
+  }
+
+  /* Goals */
+  .goals-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .goal-card {
+    padding: var(--spacing-lg);
+    background: var(--color-canvas-soft);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .goal-card:hover {
+    background: var(--color-canvas);
+    border-color: var(--color-hairline);
+  }
+
+  .goal-card.selected {
+    border-color: var(--color-primary);
+    background: var(--color-canvas);
+  }
+
+  .goal-icon {
+    font-size: 24px;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .goal-title {
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 0 0 var(--spacing-xxs);
+  }
+
+  .goal-desc {
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    color: var(--color-body);
+    margin: 0;
+  }
+
+  /* Styles */
+  .styles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .style-card {
+    padding: var(--spacing-md);
+    background: var(--color-canvas-soft);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .style-card:hover {
+    border-color: var(--color-hairline);
+  }
+
+  .style-card.selected {
+    border-color: var(--color-primary);
+  }
+
+  .style-title {
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 0 0 var(--spacing-xxs);
+  }
+
+  .style-desc {
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    color: var(--color-body);
+    margin: 0;
+  }
+
+  /* Report */
+  .report-score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-xl);
+    background: var(--color-canvas-soft);
+    border-radius: var(--radius-lg);
+  }
+
+  .score-before,
+  .score-after {
+    text-align: center;
+  }
+
+  .score-num {
+    display: block;
+    font-family: var(--font-family-geist);
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -2.4px;
+  }
+
+  .score-after .score-num {
+    color: var(--color-success);
+  }
+
+  .score-arrow {
+    font-size: 24px;
+    color: var(--color-mute);
+  }
+
+  .report-summary {
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--color-ink);
+    margin-bottom: var(--spacing-xl);
+    white-space: pre-line;
+  }
+
+  .report-section {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .report-section h3 {
+    font-family: var(--font-family-geist);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .report-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .report-actions .btn-primary,
+  .report-actions .btn-secondary {
+    flex: 1;
+  }
+
+  @media (max-width: 600px) {
+    .design-steps {
+      flex-wrap: wrap;
+    }
+
+    .step-line {
+      display: none;
+    }
+
+    .step-label {
+      display: none;
+    }
+
+    .score-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .goals-grid,
+    .styles-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .report-actions {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  // State
+  let currentStep = 1;
+  let selectedFile: File | null = null;
+  let analysisData: any = null;
+  let selectedGoal: string = '';
+  let selectedStyle: string = '';
+
+  const goals = [
+    { id: 'luxury', title: 'Luxury Upgrade', description: 'Make room look luxurious', icon: '✦' },
+    { id: 'space', title: 'Feel Larger', description: 'Make room feel larger', icon: '◎' },
+    { id: 'productivity', title: 'Productivity', description: 'Improve productivity', icon: '⚡' },
+    { id: 'comfort', title: 'Comfort', description: 'Improve comfort', icon: '◈' },
+    { id: 'storage', title: 'Storage', description: 'Improve storage', icon: '▤' },
+    { id: 'modern', title: 'Modernize', description: 'Modernize the space', icon: '◇' },
+    { id: 'resale', title: 'Resale Appeal', description: 'Increase resale value', icon: '▲' },
+  ];
+
+  const styles = [
+    { id: 'modern_luxury', title: 'Modern Luxury', description: 'Clean lines with premium materials' },
+    { id: 'scandinavian', title: 'Scandinavian', description: 'Minimal, functional, natural' },
+    { id: 'japandi', title: 'Japandi', description: 'Japanese-Scandinavian fusion' },
+    { id: 'minimalist', title: 'Minimalist', description: 'Less is more' },
+    { id: 'contemporary', title: 'Contemporary', description: 'Current trends and styles' },
+    { id: 'industrial', title: 'Industrial', description: 'Raw, urban, exposed elements' },
+    { id: 'mid_century', title: 'Mid-Century Modern', description: 'Retro with organic forms' },
+    { id: 'coastal', title: 'Coastal', description: 'Light, airy, beach-inspired' },
+    { id: 'bohemian', title: 'Bohemian', description: 'Eclectic, colorful, layered' },
+    { id: 'traditional', title: 'Traditional Luxury', description: 'Classic elegance and detail' },
+  ];
+
+  // Elements
+  const uploadZone = document.getElementById('upload-zone')!;
+  const fileInput = document.getElementById('file-input') as HTMLInputElement;
+  const previewContainer = document.getElementById('preview-container')!;
+  const previewImage = document.getElementById('preview-image') as HTMLImageElement;
+  const btnRemove = document.getElementById('btn-remove')!;
+  const btnAnalyze = document.getElementById('btn-analyze') as HTMLButtonElement;
+  const roomType = document.getElementById('room-type') as HTMLSelectElement;
+
+  // Upload handling
+  uploadZone.addEventListener('click', () => fileInput.click());
+  uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.style.borderColor = 'var(--color-primary)'; });
+  uploadZone.addEventListener('dragleave', () => { uploadZone.style.borderColor = ''; });
+  uploadZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadZone.style.borderColor = '';
+    const file = e.dataTransfer?.files[0];
+    if (file) handleFile(file);
+  });
+
+  fileInput.addEventListener('change', (e) => {
+    const file = (e.target as HTMLInputElement).files?.[0];
+    if (file) handleFile(file);
+  });
+
+  function handleFile(file: File) {
+    if (!file.type.startsWith('image/')) return;
+    selectedFile = file;
+    const url = URL.createObjectURL(file);
+    previewImage.src = url;
+    previewContainer.style.display = 'block';
+    uploadZone.style.display = 'none';
+    btnAnalyze.disabled = false;
+  }
+
+  btnRemove.addEventListener('click', () => {
+    selectedFile = null;
+    previewContainer.style.display = 'none';
+    uploadZone.style.display = 'block';
+    btnAnalyze.disabled = true;
+    fileInput.value = '';
+  });
+
+  // Analyze
+  btnAnalyze.addEventListener('click', async () => {
+    if (!selectedFile) return;
+
+    goToStep(2);
+    document.getElementById('analysis-loading')!.style.display = 'block';
+    document.getElementById('analysis-results')!.style.display = 'none';
+
+    const formData = new FormData();
+    formData.append('image', selectedFile);
+    formData.append('roomType', roomType.value);
+
+    try {
+      const res = await fetch('/api/analyze', { method: 'POST', body: formData });
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error);
+
+      analysisData = data.analysis;
+      displayAnalysis(analysisData);
+    } catch (err: any) {
+      alert('Analysis failed: ' + err.message);
+      goToStep(1);
+    }
+  });
+
+  function displayAnalysis(analysis: any) {
+    document.getElementById('analysis-loading')!.style.display = 'none';
+    document.getElementById('analysis-results')!.style.display = 'block';
+
+    document.getElementById('design-score')!.textContent = analysis.designScore;
+
+    const scores = [
+      ['layout', analysis.layoutScore],
+      ['lighting', analysis.lightingScore],
+      ['storage', analysis.storageScore],
+      ['style', analysis.styleScore],
+      ['space', analysis.spaceUtilizationScore],
+      ['balance', analysis.visualBalanceScore],
+    ];
+
+    scores.forEach(([key, val]) => {
+      const bar = document.getElementById(`${key}-bar`) as HTMLElement;
+      const num = document.getElementById(`${key}-score`)!;
+      bar.style.width = `${(val as number) * 10}%`;
+      num.textContent = val;
+    });
+
+    const findingsList = document.getElementById('findings-list')!;
+    findingsList.innerHTML = analysis.findings.map((f: any) => `
+      <div class="finding-item ${f.severity}">
+        <span class="item-category">${f.category}</span>
+        <p class="item-text">${f.issue}</p>
+      </div>
+    `).join('');
+
+    const recsList = document.getElementById('recommendations-list')!;
+    recsList.innerHTML = analysis.recommendations.map((r: any) => `
+      <div class="recommendation-item ${r.impact}">
+        <span class="item-category">${r.category}</span>
+        <p class="item-text">${r.suggestion}</p>
+        <span class="item-cost">Est. ${r.estimatedCost}</span>
+      </div>
+    `).join('');
+  }
+
+  // Goals
+  document.getElementById('btn-goals')!.addEventListener('click', () => {
+    goToStep(3);
+    const grid = document.getElementById('goals-grid')!;
+    grid.innerHTML = goals.map(g => `
+      <div class="goal-card" data-goal="${g.id}">
+        <div class="goal-icon">${g.icon}</div>
+        <h4 class="goal-title">${g.title}</h4>
+        <p class="goal-desc">${g.description}</p>
+      </div>
+    `).join('');
+
+    grid.querySelectorAll('.goal-card').forEach(card => {
+      card.addEventListener('click', () => {
+        grid.querySelectorAll('.goal-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        selectedGoal = card.getAttribute('data-goal')!;
+        document.getElementById('btn-style')!.disabled = false;
+      });
+    });
+  });
+
+  // Styles
+  document.getElementById('btn-style')!.addEventListener('click', () => {
+    goToStep(4);
+    const grid = document.getElementById('styles-grid')!;
+    grid.innerHTML = styles.map(s => `
+      <div class="style-card" data-style="${s.id}">
+        <h4 class="style-title">${s.title}</h4>
+        <p class="style-desc">${s.description}</p>
+      </div>
+    `).join('');
+
+    grid.querySelectorAll('.style-card').forEach(card => {
+      card.addEventListener('click', () => {
+        grid.querySelectorAll('.style-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        selectedStyle = card.getAttribute('data-style')!;
+        document.getElementById('btn-report')!.disabled = false;
+      });
+    });
+  });
+
+  // Generate Report
+  document.getElementById('btn-report')!.addEventListener('click', async () => {
+    goToStep(5);
+    document.getElementById('report-loading')!.style.display = 'block';
+    document.getElementById('report-content')!.style.display = 'none';
+
+    try {
+      const res = await fetch('/api/report/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          analysis: analysisData,
+          designGoal: selectedGoal,
+          style: selectedStyle,
+          roomType: roomType.value,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+
+      displayReport(data.report);
+    } catch (err: any) {
+      alert('Report generation failed: ' + err.message);
+      goToStep(4);
+    }
+  });
+
+  function displayReport(report: any) {
+    document.getElementById('report-loading')!.style.display = 'none';
+    document.getElementById('report-content')!.style.display = 'block';
+
+    document.getElementById('report-before')!.textContent = analysisData.designScore;
+    document.getElementById('report-after')!.textContent = report.newScore;
+    document.getElementById('report-summary')!.textContent = report.summary;
+
+    document.getElementById('improvements-list')!.innerHTML = report.improvements.map((i: any) => `
+      <div class="finding-item">
+        <span class="item-category">${i.category}</span>
+        <p class="item-text"><strong>${i.title}</strong> — ${i.description}</p>
+      </div>
+    `).join('');
+
+    document.getElementById('budget-list')!.innerHTML = report.budgetEstimates.map((b: any) => `
+      <div class="recommendation-item">
+        <p class="item-text"><strong>${b.tier}</strong> — ${b.range}</p>
+        <span class="item-cost">${b.description}</span>
+      </div>
+    `).join('');
+
+    document.getElementById('shopping-list')!.innerHTML = report.shoppingSuggestions.map((s: any) => `
+      <div class="finding-item">
+        <span class="item-category">${s.priority}</span>
+        <p class="item-text">${s.item} — ${s.description}</p>
+        <span class="item-cost">${s.estimatedPrice}</span>
+      </div>
+    `).join('');
+  }
+
+  // Save
+  document.getElementById('btn-save')?.addEventListener('click', async () => {
+    try {
+      const res = await fetch('/api/projects/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: `${roomType.value.replace('_', ' ')} Redesign`,
+          roomType: roomType.value,
+          analysis: analysisData,
+          designGoal: selectedGoal,
+          style: selectedStyle,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      alert('Project saved!');
+    } catch (err: any) {
+      alert('Failed to save: ' + err.message);
+    }
+  });
+
+  document.getElementById('btn-new')?.addEventListener('click', () => {
+    location.reload();
+  });
+
+  // Navigation
+  function goToStep(step: number) {
+    document.querySelectorAll('.wizard-step').forEach(s => (s as HTMLElement).style.display = 'none');
+    document.querySelectorAll('.step').forEach(s => {
+      const sNum = parseInt(s.getAttribute('data-step') || '0');
+      s.classList.remove('active', 'completed');
+      if (sNum < step) s.classList.add('completed');
+      if (sNum === step) s.classList.add('active');
+    });
+    document.getElementById(`step-${step}`).style.display = 'block';
+    currentStep = step;
+    window.scrollTo(0, 0);
+  }
+</script>

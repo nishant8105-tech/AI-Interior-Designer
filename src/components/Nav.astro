@@ -1,4 +1,9 @@
 ---
+interface Props {
+  showAuth?: boolean;
+}
+
+const { showAuth = true } = Astro.props;
 ---
 
 <nav class="nav-bar">
@@ -18,9 +23,13 @@
       <a href="#faq" class="nav-link">FAQ</a>
     </div>
 
-    <div class="nav-actions">
-      <a href="/login" class="nav-cta-login">Log In</a>
-      <a href="/signup" class="nav-cta-signup">Sign Up</a>
+    <div class="nav-actions" id="nav-actions">
+      {showAuth && (
+        <>
+          <a href="/login" class="nav-cta-login" id="nav-login">Log In</a>
+          <a href="/signup" class="nav-cta-signup" id="nav-signup">Sign Up</a>
+        </>
+      )}
     </div>
 
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
@@ -35,7 +44,7 @@
     <a href="#features" class="nav-mobile-link">Features</a>
     <a href="#examples" class="nav-mobile-link">Examples</a>
     <a href="#faq" class="nav-mobile-link">FAQ</a>
-    <div class="nav-mobile-actions">
+    <div class="nav-mobile-actions" id="nav-mobile-actions">
       <a href="/login" class="nav-cta-login">Log In</a>
       <a href="/signup" class="nav-cta-signup">Sign Up</a>
     </div>
@@ -144,6 +153,48 @@
     opacity: 0.9;
   }
 
+  .nav-cta-dashboard {
+    text-decoration: none;
+    color: var(--color-body);
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    padding: 0 var(--spacing-xs);
+    height: 28px;
+    display: flex;
+    align-items: center;
+    border-radius: var(--radius-sm);
+    background: var(--color-canvas);
+    transition: background 0.15s;
+  }
+
+  .nav-cta-dashboard:hover {
+    background: var(--color-canvas-soft-2);
+  }
+
+  .nav-cta-logout {
+    text-decoration: none;
+    color: var(--color-body);
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    padding: 0 var(--spacing-xs);
+    height: 28px;
+    display: flex;
+    align-items: center;
+    border-radius: var(--radius-sm);
+    background: var(--color-canvas);
+    cursor: pointer;
+    border: none;
+    transition: background 0.15s;
+  }
+
+  .nav-cta-logout:hover {
+    background: var(--color-canvas-soft-2);
+  }
+
   .nav-hamburger {
     display: none;
     background: none;
@@ -202,4 +253,35 @@
       mobileMenu.style.display = isOpen ? 'none' : 'flex';
     }
   });
+
+  // Check auth state and update nav
+  async function checkAuth() {
+    try {
+      const res = await fetch('/api/auth/me');
+      const data = await res.json();
+
+      const navActions = document.getElementById('nav-actions');
+      const mobileActions = document.getElementById('nav-mobile-actions');
+
+      if (data.authenticated && navActions) {
+        navActions.innerHTML = `
+          <a href="/dashboard" class="nav-cta-dashboard">Dashboard</a>
+          <a href="/design" class="nav-cta-signup">Design</a>
+          <a href="/api/auth/logout" class="nav-cta-logout">Logout</a>
+        `;
+      }
+
+      if (data.authenticated && mobileActions) {
+        mobileActions.innerHTML = `
+          <a href="/dashboard" class="nav-cta-login">Dashboard</a>
+          <a href="/design" class="nav-cta-signup">Design</a>
+          <a href="/api/auth/logout" class="nav-cta-logout">Logout</a>
+        `;
+      }
+    } catch {
+      // Not authenticated, keep default state
+    }
+  }
+
+  checkAuth();
 </script>

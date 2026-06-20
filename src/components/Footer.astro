@@ -1,0 +1,189 @@
+---
+const footerLinks = {
+  product: [
+    { label: 'How it Works', href: '#how-it-works' },
+    { label: 'Features', href: '#features' },
+    { label: 'Examples', href: '#examples' },
+    { label: 'Pricing', href: '#pricing' },
+  ],
+  rooms: [
+    { label: 'Bedroom Designer', href: '/ai-bedroom-designer' },
+    { label: 'Living Room Designer', href: '/ai-living-room-designer' },
+    { label: 'Office Designer', href: '/ai-office-designer' },
+    { label: 'Kitchen Designer', href: '/ai-kitchen-designer' },
+  ],
+  company: [
+    { label: 'About', href: '/about' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Careers', href: '/careers' },
+    { label: 'Contact', href: '/contact' },
+  ],
+  legal: [
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms of Service', href: '/terms' },
+  ],
+};
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="24" height="24" rx="6" fill="#171717"/>
+            <path d="M7 8h10M7 12h6M7 16h8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>RoomIQ</span>
+        </a>
+        <p class="footer-tagline">Design smarter spaces with AI.</p>
+      </div>
+
+      <div class="footer-column">
+        <span class="footer-heading">Product</span>
+        {footerLinks.product.map((link) => (
+          <a href={link.href} class="footer-link">{link.label}</a>
+        ))}
+      </div>
+
+      <div class="footer-column">
+        <span class="footer-heading">Rooms</span>
+        {footerLinks.rooms.map((link) => (
+          <a href={link.href} class="footer-link">{link.label}</a>
+        ))}
+      </div>
+
+      <div class="footer-column">
+        <span class="footer-heading">Company</span>
+        {footerLinks.company.map((link) => (
+          <a href={link.href} class="footer-link">{link.label}</a>
+        ))}
+      </div>
+
+      <div class="footer-column">
+        <span class="footer-heading">Legal</span>
+        {footerLinks.legal.map((link) => (
+          <a href={link.href} class="footer-link">{link.label}</a>
+        ))}
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copyright">© 2026 RoomIQ. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: var(--spacing-4xl) var(--spacing-lg) var(--spacing-xl);
+    background: var(--color-canvas);
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    text-decoration: none;
+    color: var(--color-ink);
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.32px;
+  }
+
+  .footer-tagline {
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--color-body);
+    margin: 0;
+    max-width: 240px;
+  }
+
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .footer-heading {
+    font-family: var(--font-family-geist-mono);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .footer-link {
+    text-decoration: none;
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--color-body);
+    transition: color 0.15s;
+  }
+
+  .footer-link:hover {
+    color: var(--color-ink);
+  }
+
+  .footer-bottom {
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .footer-copyright {
+    font-family: var(--font-family-geist);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-mute);
+  }
+
+  @media (max-width: 960px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl);
+    }
+
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer {
+      padding: var(--spacing-3xl) var(--spacing-md) var(--spacing-lg);
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+  }
+</style>

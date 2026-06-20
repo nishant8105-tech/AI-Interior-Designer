@@ -1,0 +1,174 @@
+---
+const testimonials = [
+  {
+    quote: "RoomIQ saved me thousands. Instead of hiring a designer, I got professional-grade analysis and a complete shopping plan for under $200.",
+    author: "Sarah Chen",
+    role: "Homeowner",
+    avatar: "SC",
+  },
+  {
+    quote: "The design score was eye-opening. I had no idea my lighting was so bad. After following the recommendations, my office feels like a completely different space.",
+    author: "Marcus Rodriguez",
+    role: "Remote Worker",
+    avatar: "MR",
+  },
+  {
+    quote: "Finally, an AI tool that goes beyond pretty pictures. The budget planner and shopping list made my renovation actually achievable.",
+    author: "Emily Park",
+    role: "First-time Buyer",
+    avatar: "EP",
+  },
+];
+---
+
+<section class="testimonials">
+  <div class="container">
+    <span class="section-eyebrow">Testimonials</span>
+    <h2 class="section-title">Loved by homeowners everywhere.</h2>
+
+    <div class="testimonials-grid">
+      {testimonials.map((testimonial) => (
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            {[...Array(5)].map(() => (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0l2.47 4.96L16 5.76l-4 3.88.94 5.48L8 12.66l-4.94 2.46.94-5.48-4-3.88 5.53-.8z"/>
+              </svg>
+            ))}
+          </div>
+          <p class="testimonial-quote">{testimonial.quote}</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">{testimonial.avatar}</div>
+            <div class="author-info">
+              <span class="author-name">{testimonial.author}</span>
+              <span class="author-role">{testimonial.role}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    padding: var(--spacing-5xl) var(--spacing-lg);
+    background: var(--color-canvas-soft);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    display: block;
+    font-family: var(--font-family-geist-mono);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-title {
+    font-family: var(--font-family-geist);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+    letter-spacing: -1.28px;
+    color: var(--color-ink);
+    text-align: center;
+    margin: 0 0 var(--spacing-3xl);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .testimonial-card {
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow:
+      0px 1px 1px rgba(0, 0, 0, 0.02),
+      0px 2px 2px rgba(0, 0, 0, 0.04),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  }
+
+  .testimonial-stars {
+    display: flex;
+    gap: 2px;
+    color: var(--color-warning);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .testimonial-quote {
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--color-ink);
+    margin: 0 0 var(--spacing-lg);
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: var(--color-canvas-soft);
+    color: var(--color-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-name {
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--color-ink);
+  }
+
+  .author-role {
+    font-family: var(--font-family-geist);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-mute);
+  }
+
+  @media (max-width: 960px) {
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .testimonials {
+      padding: var(--spacing-4xl) var(--spacing-md);
+    }
+  }
+</style>

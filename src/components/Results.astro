@@ -1,0 +1,254 @@
+---
+const results = [
+  {
+    room: 'Living Room',
+    beforeScore: 63,
+    afterScore: 92,
+    budget: '$1,800',
+    time: '2 Weekends',
+    improvement: '+29 points',
+  },
+  {
+    room: 'Bedroom',
+    beforeScore: 58,
+    afterScore: 89,
+    budget: '$1,200',
+    time: '1 Weekend',
+    improvement: '+31 points',
+  },
+  {
+    room: 'Home Office',
+    beforeScore: 45,
+    afterScore: 87,
+    budget: '$2,400',
+    time: '3 Weekends',
+    improvement: '+42 points',
+  },
+];
+---
+
+<section class="results" id="examples">
+  <div class="container">
+    <span class="section-eyebrow">Results</span>
+    <h2 class="section-title">See the transformation.</h2>
+    <p class="section-subtitle">
+      Real rooms. Real improvements. Measurable design impact.
+    </p>
+
+    <div class="results-grid">
+      {results.map((result) => (
+        <div class="result-card">
+          <div class="result-header">
+            <span class="result-room">{result.room}</span>
+            <span class="result-improvement">{result.improvement}</span>
+          </div>
+
+          <div class="result-scores">
+            <div class="score-item">
+              <span class="score-label">Before</span>
+              <span class="score-value score-before">{result.beforeScore}</span>
+            </div>
+            <div class="score-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="score-item">
+              <span class="score-label">After</span>
+              <span class="score-value score-after">{result.afterScore}</span>
+            </div>
+          </div>
+
+          <div class="result-meta">
+            <div class="meta-item">
+              <span class="meta-label">Budget</span>
+              <span class="meta-value">{result.budget}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Time</span>
+              <span class="meta-value">{result.time}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .results {
+    padding: var(--spacing-5xl) var(--spacing-lg);
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    display: block;
+    font-family: var(--font-family-geist-mono);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-hairline-strong);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-title {
+    font-family: var(--font-family-geist);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+    letter-spacing: -1.28px;
+    color: var(--color-on-primary);
+    text-align: center;
+    margin: 0 0 var(--spacing-sm);
+  }
+
+  .section-subtitle {
+    font-family: var(--font-family-geist);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    color: var(--color-hairline-strong);
+    text-align: center;
+    margin: 0 auto var(--spacing-3xl);
+    max-width: 480px;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .result-card {
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+  }
+
+  .result-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .result-room {
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  .result-improvement {
+    font-family: var(--font-family-geist-mono);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-cyan);
+    background: rgba(80, 227, 194, 0.12);
+    padding: var(--spacing-xxs) var(--spacing-xs);
+    border-radius: var(--radius-full);
+  }
+
+  .result-scores {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-lg) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xxs);
+  }
+
+  .score-label {
+    font-family: var(--font-family-geist-mono);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-hairline-strong);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .score-value {
+    font-family: var(--font-family-geist);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: -1.28px;
+  }
+
+  .score-before {
+    color: var(--color-hairline-strong);
+  }
+
+  .score-after {
+    color: var(--color-cyan);
+  }
+
+  .score-arrow {
+    color: var(--color-hairline-strong);
+  }
+
+  .result-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxs);
+  }
+
+  .meta-label {
+    font-family: var(--font-family-geist-mono);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-hairline-strong);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .meta-value {
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  @media (max-width: 960px) {
+    .results-grid {
+      grid-template-columns: 1fr;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .results {
+      padding: var(--spacing-4xl) var(--spacing-md);
+    }
+  }
+</style>

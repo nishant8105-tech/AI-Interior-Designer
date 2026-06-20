@@ -1,0 +1,539 @@
+# AI Interior Designer Platform
+
+Build a premium AI-powered interior design platform using Astro, Tailwind CSS v4, TypeScript, and modern web standards. Follow Astro best practices, Tailwind v4 conventions, and the project's DESIGN.md design system.
+
+The design quality should feel comparable to Vercel, Linear, Apple, Notion, and Airbnb—minimal, elegant, fast, highly polished, and conversion-focused.
+
+## Core Vision
+
+Do NOT build another AI image generator.
+
+Build an **AI Interior Designer**.
+
+Most competitors generate pretty room images. This platform should help users:
+
+* Understand what's wrong with their room
+* Receive professional design feedback
+* Generate improved room concepts
+* Estimate budgets
+* Create shopping plans
+* Improve layouts
+* Make real-world design decisions
+
+The user should feel like they hired a professional interior designer, not used an image generation tool.
+
+---
+
+# Product Name
+
+Use a premium brand identity suitable for a venture-backed SaaS startup.
+
+Examples:
+
+* RoomIQ
+* DesignPilot
+* SpaceMind AI
+* InteriorCopilot
+* RoomCraft AI
+
+Use placeholder branding that can be easily changed.
+
+---
+
+# Primary User Flow
+
+## Step 1
+
+User uploads a room photo.
+
+Supported room types:
+
+* Bedroom
+* Living Room
+* Office
+* Kitchen
+* Bathroom
+* Dining Room
+* Studio Apartment
+
+---
+
+## Step 2
+
+AI analyzes the room.
+
+Instead of immediately generating images, show:
+
+### Room Analysis
+
+Design Score: 78/100
+
+Layout: 8/10
+
+Lighting: 6/10
+
+Storage: 7/10
+
+Style Consistency: 8/10
+
+Space Utilization: 7/10
+
+Visual Balance: 8/10
+
+---
+
+### AI Findings
+
+Examples:
+
+* Room feels visually crowded
+* Lighting is uneven
+* Furniture arrangement limits movement
+* Color palette lacks cohesion
+* Storage opportunities are underutilized
+
+This creates immediate value before image generation.
+
+---
+
+## Step 3
+
+User selects design goal.
+
+Examples:
+
+* Make room look luxurious
+* Make room feel larger
+* Improve productivity
+* Improve comfort
+* Improve storage
+* Modernize the space
+* Increase resale appeal
+
+---
+
+## Step 4
+
+Select style.
+
+Available styles:
+
+* Modern Luxury
+* Scandinavian
+* Japandi
+* Minimalist
+* Contemporary
+* Industrial
+* Mid-Century Modern
+* Coastal
+* Bohemian
+* Traditional Luxury
+
+---
+
+## Step 5
+
+Generate design concepts.
+
+Generate:
+
+* Concept A
+* Concept B
+* Concept C
+
+Each concept includes:
+
+* Rendered image
+* Design explanation
+* Budget estimate
+* Shopping suggestions
+
+---
+
+# AI Design Consultant
+
+This is the main differentiator.
+
+After every generation provide:
+
+### Design Summary
+
+Explain:
+
+* Why changes were made
+* Why colors were chosen
+* Why furniture was repositioned
+* How the room functionality improved
+
+The explanation should sound like a professional designer.
+
+---
+
+### Improvement Report
+
+Example:
+
+Current Room Score: 78
+
+New Room Score: 93
+
+Improvements:
+
+✓ Better lighting
+
+✓ Improved furniture flow
+
+✓ More cohesive color palette
+
+✓ Better visual hierarchy
+
+✓ Increased perceived room size
+
+---
+
+# Design DNA
+
+Create a personalized design profile.
+
+Users can upload:
+
+* Pinterest inspiration
+* Instagram room photos
+* Hotel interiors
+* Dream home images
+
+AI creates:
+
+### Design DNA
+
+72% Scandinavian
+
+18% Japandi
+
+10% Modern Luxury
+
+Preferred Colors:
+
+* Warm White
+* Oak Wood
+* Sage Green
+
+Future generations should adapt to this profile.
+
+---
+
+# AI Chat Designer
+
+After generation provide an interactive design assistant.
+
+Users can ask:
+
+How can I do this under $1000?
+
+Can you make this more luxurious?
+
+Suggest a darker color palette.
+
+Add more storage.
+
+Make this renter friendly.
+
+Replace the sofa.
+
+Modify the design without restarting the workflow.
+
+---
+
+# Shopping Planner
+
+After generation automatically identify items.
+
+Examples:
+
+* Sofa
+* Rug
+* Lamp
+* Coffee Table
+* Wall Art
+* Curtains
+
+Generate:
+
+### Shopping Plan
+
+Must Have
+
+Recommended
+
+Optional Upgrades
+
+Include estimated pricing.
+
+---
+
+# Budget Planner
+
+Provide multiple budget scenarios.
+
+Examples:
+
+Budget Refresh
+
+$300–$1000
+
+Mid-Range Upgrade
+
+$1000–$5000
+
+Premium Makeover
+
+$5000–$15000
+
+Luxury Transformation
+
+$15000+
+
+Explain where money should be spent for maximum impact.
+
+---
+
+# AI Layout Optimizer
+
+Generate:
+
+Current Layout
+
+Suggested Layout
+
+Show furniture positioning recommendations.
+
+Provide explanations for:
+
+* Traffic flow
+* Space efficiency
+* Functionality improvements
+
+---
+
+# Room Roast Mode
+
+Optional viral feature.
+
+AI analyzes room and gives playful but constructive feedback.
+
+Example:
+
+Your room score: 61/100
+
+Pros:
+
+✓ Great natural light
+
+✓ Nice flooring
+
+Cons:
+
+✗ Furniture feels disconnected
+
+✗ Room lacks focal point
+
+✗ Lighting is too harsh
+
+Provide recommendations for improvement.
+
+Make results shareable.
+
+---
+
+# Virtual Staging Mode
+
+For empty rooms.
+
+Generate:
+
+* Family Home
+* Luxury Home
+* Executive Apartment
+* Student Apartment
+* Airbnb Ready
+
+versions.
+
+---
+
+# Renovation Roadmap
+
+Generate implementation plans.
+
+Example:
+
+Weekend Upgrade Plan
+
+Day 1
+
+Paint walls
+
+Day 2
+
+Replace lighting
+
+Day 3
+
+Install decor
+
+Day 4
+
+Furniture rearrangement
+
+Provide realistic action steps.
+
+---
+
+# Dashboard
+
+Users can:
+
+* Save projects
+* Revisit designs
+* Compare generations
+* Manage Design DNA
+* Track room improvements
+
+---
+
+# Homepage Structure
+
+## Hero
+
+Headline:
+
+Your Personal AI Interior Designer
+
+Subheadline:
+
+Analyze, redesign, budget, furnish, and transform any room using AI.
+
+Primary CTA:
+
+Design My Room
+
+Secondary CTA:
+
+See Examples
+
+---
+
+## Interactive Demo
+
+Large before/after comparison slider.
+
+Must appear above the fold.
+
+---
+
+## How It Works
+
+1. Upload Room
+2. Analyze Space
+3. Choose Goals
+4. Generate Concepts
+5. Plan & Implement
+
+---
+
+## Feature Grid
+
+Show differentiators:
+
+* Design Analysis
+* Design DNA
+* AI Designer Chat
+* Budget Planner
+* Shopping Planner
+* Layout Optimizer
+
+---
+
+## Results Showcase
+
+Display transformations with metrics.
+
+Example:
+
+Before Score: 63
+
+After Score: 92
+
+Budget: $1800
+
+Time Required: 2 Weekends
+
+---
+
+## Testimonials
+
+Premium SaaS presentation style.
+
+---
+
+## FAQ
+
+SEO optimized.
+
+---
+
+# Design Requirements
+
+Visual quality should feel like a modern venture-backed startup.
+
+Requirements:
+
+* Large imagery
+* Minimal UI
+* Strong typography
+* Smooth animations
+* Dark mode
+* Beautiful empty states
+* Elegant loading experiences
+* Premium spacing
+* Mobile-first design
+* Accessibility compliant
+
+Use:
+
+* Geist Sans
+* Geist Mono
+
+---
+
+# SEO Strategy
+
+Create dedicated landing pages:
+
+/ai-bedroom-designer
+
+/ai-living-room-designer
+
+/ai-office-designer
+
+/ai-kitchen-designer
+
+/virtual-staging-ai
+
+/room-design-analyzer
+
+/interior-design-budget-planner
+
+/design-style-quiz
+
+Focus heavily on informational SEO and long-tail interior design queries.
+
+---
+
+# Portfolio Goal
+
+This project should not look like a student AI wrapper.
+
+It should look like a startup-ready SaaS platform with a clear competitive advantage over image-only interior design tools.
+
+The main differentiator is that the platform acts as a complete AI Interior Designer that analyzes, explains, plans, budgets, optimizes, and guides users through improving their spaces rather than only generating beautiful images.

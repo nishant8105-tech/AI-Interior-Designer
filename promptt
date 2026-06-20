@@ -1,0 +1,352 @@
+# Project Configuration Decisions
+
+## 1. Brand Name
+
+**RoomIQ**
+
+### Why
+
+* Short and memorable
+* Sounds like a real SaaS startup
+* Professional and modern
+* Easy to brand and market
+* Flexible for future expansion beyond interior design
+
+### Tagline
+
+Design smarter spaces with AI.
+
+---
+
+## 2. AI Backend
+
+### MVP Phase (Before Image Generation)
+
+Use:
+
+* OpenAI GPT-4o (Vision + Text)
+
+Capabilities:
+
+* Room analysis
+* Design scoring
+* Style detection
+* Design recommendations
+* Budget estimation
+* Shopping suggestions
+* Design DNA generation
+* Room improvement reports
+
+### Future Phase (After Core Product Is Complete)
+
+Add real image generation using:
+
+* Fal.ai Flux Kontext (Preferred)
+* OpenAI Image Generation Models
+
+Architecture should be provider-agnostic so AI providers can be swapped later without major code changes.
+
+Example architecture:
+
+Frontend
+→ Astro API Routes
+→ AI Service Layer
+→ OpenAI Vision
+→ Image Generation Provider
+
+For MVP, image generation should be abstracted behind interfaces and mocked with sample data so the application is production-ready for future integration.
+
+---
+
+## 3. Database
+
+Use:
+
+**Supabase**
+
+### Reason
+
+The application needs:
+
+* User accounts
+* Saved projects
+* Room analyses
+* Design history
+* Design DNA profiles
+* Future subscription support
+
+### Core Tables
+
+users
+
+projects
+
+room_analyses
+
+design_reports
+
+design_dna
+
+saved_designs
+
+activity_logs
+
+### MVP Requirement
+
+Implement the full database architecture from the beginning, even if some tables are not fully utilized initially.
+
+---
+
+## 4. Authentication
+
+Use:
+
+**Supabase Auth**
+
+### Authentication Methods
+
+* Email & Password
+* Google OAuth
+
+### Why
+
+Users should be able to:
+
+* Save projects
+* Return later
+* Compare designs
+* Build Design DNA over time
+* Maintain project history
+
+The application should feel like a real SaaS product rather than a one-time demo tool.
+
+---
+
+## 5. Deployment Target
+
+Use:
+
+**Vercel**
+
+### Reason
+
+* Perfect Astro support
+* Excellent performance
+* Easy deployment workflow
+* Professional developer experience
+* Recruiter-friendly tech stack
+* Easy CI/CD with GitHub
+
+Configure the project for Vercel deployment from the beginning.
+
+---
+
+## 6. Scope Priority
+
+### Phase 1 — Portfolio-Ready MVP
+
+Build first:
+
+#### Landing Page
+
+* Premium SaaS homepage
+* Vercel-quality design
+* Strong product positioning
+
+#### Room Upload
+
+* Drag and drop upload
+* File validation
+* Mobile support
+
+#### Room Analysis
+
+Generate:
+
+* Design Score
+* Lighting Score
+* Layout Score
+* Storage Score
+* Style Consistency Score
+* Functionality Score
+
+#### AI Recommendations
+
+Examples:
+
+* Improve lighting
+* Rearrange furniture
+* Better color palette
+* Storage opportunities
+* Space optimization suggestions
+
+#### Design Goals
+
+Users choose:
+
+* Luxury Upgrade
+* Improve Productivity
+* Better Storage
+* Modernize Space
+* Increase Comfort
+* Make Room Feel Larger
+
+#### Style Selection
+
+Available styles:
+
+* Modern Luxury
+* Scandinavian
+* Japandi
+* Minimalist
+* Contemporary
+* Industrial
+* Mid-Century Modern
+* Coastal
+* Bohemian
+* Traditional Luxury
+
+#### Design Report
+
+Generate:
+
+* Room Summary
+* Key Issues
+* Recommended Improvements
+* Budget Estimates
+* Shopping Suggestions
+
+#### Saved Projects
+
+Authenticated users can:
+
+* Save analyses
+* View history
+* Reopen reports
+
+---
+
+### Phase 2
+
+Add:
+
+* Design DNA
+* AI Designer Chat
+* Project Comparison
+* Enhanced Reports
+
+---
+
+### Phase 3
+
+Add Real Image Generation
+
+Integrate:
+
+* Fal.ai Flux Kontext
+* OpenAI Image Generation
+
+Generate:
+
+* Concept A
+* Concept B
+* Concept C
+
+Features:
+
+* Before/After Slider
+* Multiple Variations
+* High Resolution Downloads
+
+---
+
+### Phase 4
+
+Add Advanced Features
+
+* Shopping Planner
+* Layout Optimizer
+* Virtual Staging
+* Renovation Planner
+* Budget Planner
+* Shareable Reports
+
+---
+
+## Product Positioning
+
+Do NOT position the platform as:
+
+"Generate AI room images."
+
+Position it as:
+
+"Your Personal AI Interior Designer."
+
+The product should help users:
+
+* Analyze rooms
+* Understand design problems
+* Improve layouts
+* Plan renovations
+* Estimate budgets
+* Discover furniture ideas
+* Create actionable design plans
+
+Image generation should be presented as a later enhancement to the design workflow, not the primary feature.
+
+---
+
+## Technical Stack
+
+### Frontend
+
+* Astro
+* TypeScript
+* Tailwind CSS v4
+* Shadcn UI (Astro compatible components)
+
+### Backend
+
+* Astro API Routes
+
+### Database
+
+* Supabase PostgreSQL
+
+### Authentication
+
+* Supabase Auth
+
+### AI
+
+Phase 1:
+
+* OpenAI GPT-4o
+
+Phase 3:
+
+* Fal.ai Flux Kontext
+* OpenAI Image Generation
+
+### Deployment
+
+* Vercel
+
+---
+
+## Development Goal
+
+The final product should feel like a startup-backed SaaS application rather than a student project.
+
+Focus heavily on:
+
+* Exceptional UI/UX
+* Strong product thinking
+* Clear differentiation from competitors like MNML AI
+* Practical design guidance
+* Premium user experience
+* Clean architecture
+* Scalability for future AI image generation
+
+The MVP should already provide meaningful value through room analysis and design consulting before any image generation is introduced.

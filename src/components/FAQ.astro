@@ -1,0 +1,143 @@
+---
+const faqs = [
+  {
+    question: 'How does the AI room analysis work?',
+    answer: 'Upload a photo and our AI analyzes your room across six dimensions: layout, lighting, storage, style consistency, space utilization, and visual balance. You get a comprehensive score with specific improvement recommendations.',
+  },
+  {
+    question: 'Do I need design experience?',
+    answer: 'Not at all. RoomIQ is designed for everyone. The AI does the professional analysis and provides clear, actionable guidance. You just follow the recommendations.',
+  },
+  {
+    question: 'What room types are supported?',
+    answer: 'We support bedrooms, living rooms, offices, kitchens, bathrooms, dining rooms, and studio apartments. Our AI is trained on thousands of rooms across all these categories.',
+  },
+  {
+    question: 'Can I use this for rental properties?',
+    answer: 'Yes! RoomIQ includes renter-friendly design options that focus on temporary, non-permanent improvements like furniture arrangement, lighting, decor, and removable wallpaper.',
+  },
+  {
+    question: 'How accurate are the budget estimates?',
+    answer: 'Budget estimates are based on current market prices and typical costs for similar projects. They provide a reliable range, though actual costs may vary by location and specific product choices.',
+  },
+  {
+    question: 'Can I save and revisit my designs?',
+    answer: 'Yes. Create a free account to save all your room analyses, design reports, and shopping plans. You can revisit and compare designs anytime.',
+  },
+];
+---
+
+<section class="faq" id="faq">
+  <div class="container">
+    <span class="section-eyebrow">FAQ</span>
+    <h2 class="section-title">Frequently asked questions.</h2>
+
+    <div class="faq-list">
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <p class="faq-answer">{faq.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    padding: var(--spacing-5xl) var(--spacing-lg);
+    background: var(--color-canvas);
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    display: block;
+    font-family: var(--font-family-geist-mono);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-title {
+    font-family: var(--font-family-geist);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+    letter-spacing: -1.28px;
+    color: var(--color-ink);
+    text-align: center;
+    margin: 0 0 var(--spacing-3xl);
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .faq-item:first-child {
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) 0;
+    cursor: pointer;
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: var(--color-ink);
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.2s;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 0 var(--spacing-md);
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--color-body);
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .faq {
+      padding: var(--spacing-4xl) var(--spacing-md);
+    }
+  }
+</style>

@@ -1,0 +1,191 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Upload Room',
+    description: 'Take a photo or upload an existing image of any room.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  },
+  {
+    number: '02',
+    title: 'Analyze Space',
+    description: 'AI scores your room on layout, lighting, storage, and style.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>`,
+  },
+  {
+    number: '03',
+    title: 'Choose Goals',
+    description: 'Tell us what you want: more space, better lighting, or a full redesign.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  },
+  {
+    number: '04',
+    title: 'Generate Concepts',
+    description: 'Get 3 unique design concepts with explanations and budgets.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  },
+  {
+    number: '05',
+    title: 'Plan & Implement',
+    description: 'Get a shopping list, budget breakdown, and renovation roadmap.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  },
+];
+---
+
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <span class="section-eyebrow">How it works</span>
+    <h2 class="section-title">Design smarter in five steps.</h2>
+    <p class="section-subtitle">
+      No design experience needed. Upload a photo and let AI do the rest.
+    </p>
+
+    <div class="steps-grid">
+      {steps.map((step) => (
+        <div class="step-card">
+          <div class="step-icon" set:html={step.icon} />
+          <span class="step-number">{step.number}</span>
+          <h3 class="step-title">{step.title}</h3>
+          <p class="step-description">{step.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-it-works {
+    padding: var(--spacing-5xl) var(--spacing-lg);
+    background: var(--color-canvas-soft);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    display: block;
+    font-family: var(--font-family-geist-mono);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-title {
+    font-family: var(--font-family-geist);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+    letter-spacing: -1.28px;
+    color: var(--color-ink);
+    text-align: center;
+    margin: 0 0 var(--spacing-sm);
+  }
+
+  .section-subtitle {
+    font-family: var(--font-family-geist);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    color: var(--color-body);
+    text-align: center;
+    margin: 0 auto var(--spacing-3xl);
+    max-width: 560px;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .step-card {
+    text-align: center;
+    padding: var(--spacing-lg);
+  }
+
+  .step-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--spacing-md);
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    box-shadow:
+      0px 1px 1px rgba(0, 0, 0, 0.02),
+      0px 2px 2px rgba(0, 0, 0, 0.04),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  }
+
+  .step-number {
+    display: block;
+    font-family: var(--font-family-geist-mono);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-mute);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .step-title {
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    color: var(--color-ink);
+    margin: 0 0 var(--spacing-xs);
+  }
+
+  .step-description {
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--color-body);
+    margin: 0;
+  }
+
+  @media (max-width: 960px) {
+    .steps-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .how-it-works {
+      padding: var(--spacing-4xl) var(--spacing-md);
+    }
+
+    .steps-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .step-card {
+      display: flex;
+      flex-direction: row;
+      text-align: left;
+      gap: var(--spacing-md);
+      padding: var(--spacing-md);
+    }
+
+    .step-icon {
+      margin: 0;
+      flex-shrink: 0;
+    }
+
+    .step-number {
+      margin-bottom: 0;
+    }
+  }
+</style>

@@ -1,0 +1,171 @@
+---
+const features = [
+  {
+    title: 'Design Analysis',
+    description: 'Get a comprehensive score for layout, lighting, storage, style consistency, and space utilization.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21.21 15.89A10 10 0 118 2.83M22 12A10 10 0 0012 2v10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  },
+  {
+    title: 'Design DNA',
+    description: 'Build a personalized design profile from your inspiration. Every future generation adapts to your taste.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 00-7.35 16.76C6.23 16.1 9 14 12 14s5.77 2.1 7.35 4.76A10 10 0 0012 2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>`,
+  },
+  {
+    title: 'AI Designer Chat',
+    description: 'Ask questions, request changes, and refine your design without restarting the workflow.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  },
+  {
+    title: 'Budget Planner',
+    description: 'Get multiple budget scenarios from refresh to luxury transformation with spending recommendations.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  },
+  {
+    title: 'Shopping Planner',
+    description: 'Automatically identify items needed and get a prioritized shopping list with estimated pricing.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  },
+  {
+    title: 'Layout Optimizer',
+    description: 'See current vs suggested furniture positioning with traffic flow and space efficiency explanations.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="1.5"/></svg>`,
+  },
+];
+---
+
+<section class="features" id="features">
+  <div class="container">
+    <span class="section-eyebrow">Features</span>
+    <h2 class="section-title">Everything you need to transform your space.</h2>
+    <p class="section-subtitle">
+      Not just pretty images. A complete design platform that analyzes, plans, budgets, and guides you through every step.
+    </p>
+
+    <div class="features-grid">
+      {features.map((feature) => (
+        <div class="feature-card">
+          <div class="feature-icon" set:html={feature.icon} />
+          <h3 class="feature-title">{feature.title}</h3>
+          <p class="feature-description">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .features {
+    padding: var(--spacing-5xl) var(--spacing-lg);
+    background: var(--color-canvas);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    display: block;
+    font-family: var(--font-family-geist-mono);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-title {
+    font-family: var(--font-family-geist);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+    letter-spacing: -1.28px;
+    color: var(--color-ink);
+    text-align: center;
+    margin: 0 0 var(--spacing-sm);
+  }
+
+  .section-subtitle {
+    font-family: var(--font-family-geist);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    color: var(--color-body);
+    text-align: center;
+    margin: 0 auto var(--spacing-3xl);
+    max-width: 600px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .feature-card {
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas);
+    box-shadow:
+      0px 2px 2px rgba(0, 0, 0, 0.04),
+      0px 8px 8px -8px rgba(0, 0, 0, 0.04),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.2s;
+  }
+
+  .feature-card:hover {
+    box-shadow:
+      0px 2px 2px rgba(0, 0, 0, 0.04),
+      0px 8px 16px -4px rgba(0, 0, 0, 0.06),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  }
+
+  .feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    background: var(--color-canvas-soft);
+    color: var(--color-ink);
+  }
+
+  .feature-title {
+    font-family: var(--font-family-geist);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    color: var(--color-ink);
+    margin: 0 0 var(--spacing-xs);
+  }
+
+  .feature-description {
+    font-family: var(--font-family-geist);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--color-body);
+    margin: 0;
+  }
+
+  @media (max-width: 960px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .features {
+      padding: var(--spacing-4xl) var(--spacing-md);
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
